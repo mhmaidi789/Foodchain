@@ -1,0 +1,25 @@
+{
+  "name": "foodchain",
+  "version": "1.0.0",
+  "description": "foodchain",
+  "main": "index.js",
+  "scripts": {
+    "start": "export NODE_ENV=development; nodemon server/server.js",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mhmaidi789/Foodchain.git"
+  },
+  "author": "Mo Hmaidi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mhmaidi789/Foodchain/issues"
+  },
+  "homepage": "https://github.com/mhmaidi789/Foodchain#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.12.2",
+    "nodemon": "^2.0.7"
+  }
+}
