@@ -13,19 +13,23 @@ recipeController.getAllRecipes = (req, res, next) => {
     res.locals.recipes = recipes;
     return next();
   })
-
-
 }
 
+//Get all recipes
+recipeController.getAmazonIngredients = (req, res, next) => {
+  
+
+ 
+}
 
 
 //Create a recipe
 recipeController.createRecipe = (req, res, next) => {
 
   //Receive information from front-end
-  const {recipeName, summary} = req.body;
+  const {recipeName, summary, link, ingredients} = req.body;
 
-  Recipe.create({recipeName, summary}, (err, recipe) =>{
+  Recipe.create({recipeName, summary, link, ingredients}, (err, recipe) =>{
     if(err) return next({err});
     res.locals.recipe = recipe;
     return next();
