@@ -5,6 +5,7 @@ const fetch = require('node-fetch')
 
 //Controllers
 const recipeController = require('./controllers/recipeController.js');
+const ingredientController = require('./controllers/ingredientController.js');
 
 const PORT = 3000;
 
@@ -34,26 +35,6 @@ mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true, useUnifiedT
 //Body parser
 app.use(express.json());
 
-var axios = require("axios").default;
-
-var options = {
-  method: 'GET',
-  url: 'https://amazon-price1.p.rapidapi.com/search',
-  params: {keywords: 'Onion', marketplace: 'US'},
-  headers: {
-    'x-rapidapi-key': '',
-    'x-rapidapi-host': ''
-  }
-};
-
-axios.request(options).then(function (response) {
-	console.log(response.data);
-}).catch(function (error) {
-  console.log('error')
-	console.error(error);
-});
-
-
 
 //Initial Page Request
 app.get('/', recipeController.getAllRecipes, (req, res) => {
@@ -61,10 +42,12 @@ app.get('/', recipeController.getAllRecipes, (req, res) => {
   res.status(200).send(res.locals.recipes)
 });
 
-app.get('/amazonEligible', recipeController.getAllRecipes, recipeController.getAmazonIngredients, (req, res) => {
-
-  res.status(200).send(rers.locals.recipes)
+//Get recipe, check if amazon eligible
+app.get('/getandcheck', recipeController.getRecipe, ingredientController.ingredientSearch, (req, res) => {
+  
+  res.status(200).send(res.locals.ingredientsCheckList);
 })
+
 
 app.post('/newRecipe', recipeController.createRecipe, (req, res) => {
   res.status(200).send(res.locals.recipe)

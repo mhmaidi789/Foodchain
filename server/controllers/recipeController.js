@@ -15,12 +15,18 @@ recipeController.getAllRecipes = (req, res, next) => {
   })
 }
 
-//Get all recipes
-recipeController.getAmazonIngredients = (req, res, next) => {
-  
+//Get specific recipes
+recipeController.getRecipe = (req, res, next) => {
 
- 
+  const {recipeName} = req.body;
+
+  Recipe.find({recipeName}, (err, recipe) => {
+    if(err) return next({err});
+    res.locals.recipe = recipe[0];
+    return next();
+  })
 }
+
 
 
 //Create a recipe
@@ -35,5 +41,7 @@ recipeController.createRecipe = (req, res, next) => {
     return next();
   })
 }
+
+
 
 module.exports = recipeController;
