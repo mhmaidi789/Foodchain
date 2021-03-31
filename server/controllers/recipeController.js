@@ -42,6 +42,31 @@ recipeController.createRecipe = (req, res, next) => {
   })
 }
 
+//Update recipe 
+recipeController.updateRecipe = (req, res, next) => {
+
+  const {originalRecipeName, newRecipeName, summary, link, ingredients} = req.body;
+
+  Recipe.updateOne({recipeName: originalRecipeName}, {recipeName: newRecipeName, summary, link, ingredients},  (err, output) => {
+    if(err) return next({err});
+    res.locals.output = output[0];
+    return next();
+  });
+}
+
+//Delete recipes by name
+recipeController.deleteOne = (req, res, next) => {
+
+  const {recipeName} = req.body;
+
+  Recipe.deleteOne({recipeName}, (err) => {
+    if (err) return next({err});
+    return next();
+  })
+
+
+}
+
 
 
 module.exports = recipeController;

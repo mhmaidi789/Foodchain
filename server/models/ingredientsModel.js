@@ -9,6 +9,7 @@ const ingredientSchema = new Schema({
   detailPageURL: {type: String},
   isPrimeEligible: {type: String},
   imageURL: {type: String},
+  dateFound: {type: Date, default: Date.now}
 });
 
 module.exports = mongoose.model('Ingredient', ingredientSchema);
