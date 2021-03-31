@@ -28,14 +28,13 @@ recipeController.getRecipe = (req, res, next) => {
 }
 
 
-
 //Create a recipe
 recipeController.createRecipe = (req, res, next) => {
 
   //Receive information from front-end
-  const {recipeName, summary, link, ingredients} = req.body;
+  const {recipeName, notes, link, ingredients} = req.body;
 
-  Recipe.create({recipeName, summary, link, ingredients}, (err, recipe) =>{
+  Recipe.create({recipeName, notes, link, ingredients}, (err, recipe) =>{
     if(err) return next({err});
     res.locals.recipe = recipe;
     return next();
@@ -45,9 +44,9 @@ recipeController.createRecipe = (req, res, next) => {
 //Update recipe 
 recipeController.updateRecipe = (req, res, next) => {
 
-  const {originalRecipeName, newRecipeName, summary, link, ingredients} = req.body;
+  const {originalRecipeName, newRecipeName, notes, link, ingredients} = req.body;
 
-  Recipe.updateOne({recipeName: originalRecipeName}, {recipeName: newRecipeName, summary, link, ingredients},  (err, output) => {
+  Recipe.updateOne({recipeName: originalRecipeName}, {recipeName: newRecipeName, notes, link, ingredients},  (err, output) => {
     if(err) return next({err});
     res.locals.output = output[0];
     return next();

@@ -14,7 +14,8 @@ ingredientController.ingredientSearch = (req, res, next) => {
 
   //Iterate through each ingredient found in res.locals.recipe
   const recipe = res.locals.recipe;
-  recipe.ingredients.forEach( (item, index) => {
+  const ingredients = recipe.ingredients.split(',');
+  ingredients.forEach( (item, index) => {
 
     //Check database for ingredient and update ingredientCheckList
     Ingredient.find({searchTerm: item}, (err, itemIngredient)=>{
@@ -26,7 +27,7 @@ ingredientController.ingredientSearch = (req, res, next) => {
  
       if(itemIngredient.length >= 1){
         ingredientCheckList[item] = itemIngredient;
-        if(index >= recipe.ingredients.length-1){
+        if(index >= ingredients.length-1){
           res.locals.ingredientsCheckList = ingredientCheckList;
           return next()
         }
@@ -38,7 +39,7 @@ ingredientController.ingredientSearch = (req, res, next) => {
         var options = {
           method: 'GET',
           url: 'https://amazon-price1.p.rapidapi.com/search',
-          params: {keywords: item, marketplace: 'US'},
+          params: {keywords: item, marketplace: 'US', page: '1'},
           headers: {
             'x-rapidapi-key': '25bc85f706msh5e563f0c5f0fbcap107099jsn79c93516580e',
             'x-rapidapi-host': 'amazon-price1.p.rapidapi.com'
@@ -49,13 +50,13 @@ ingredientController.ingredientSearch = (req, res, next) => {
         .then((response) => {
           if(response.data.length>0){
             //Update checklist
-            ingredientCheckList[item] = response.data[0];
+            ingredientCheckList[item] = response.data[1];
             //Create ingredient in database
-            createIngredient(item, response.data[0]);
+            createIngredient(item, response.data[1]);
           }else{
             ingredientCheckList[item] = 'N/A'
           }
-          if(index >= recipe.ingredients.length-1){
+          if(index >= ingredients.length-1){
             res.locals.ingredientsCheckList = ingredientCheckList;
             return next()
           }

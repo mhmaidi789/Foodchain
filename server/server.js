@@ -13,24 +13,15 @@ const app = express();
 
 // //Setup database
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true, useUnifiedTopology: true});
-// const mongoURI = process.env.NODE_ENV === 'test' ? 'mongodb://localhost/foodchaintest' : 'mongodb://localhost/foodchaindev';
-// mongoose.connect(mongoURI);
+const uri = "mongodb+srv://sigfigs789:Fakepassword789@cluster0.cj7jm.mongodb.net/Foodchain?retryWrites=true&w=majority"
+mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
 
-// const db = mongoose.connection
-// db.on('error', console.error.bind(console, 'connection error:'));
-// db.once('open', function callback () {
-//     console.log('Conntected To Mongo Database');
-// });
 
-// const MongoClient = require('mongodb').MongoClient;
-// const uri = "mongodb+srv://sigfigs789:Fakepassword789@cluster0.cj7jm.mongodb.net/foodchain?retryWrites=true&w=majority";
-// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-// client.connect(err => {
-//   const collection = client.db("test").collection("devices");
-//   // perform actions on the collection object
-//   client.close();
-// });
+const db = mongoose.connection
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback () {
+    console.log('Conntected To Mongo Database');
+});
 
 // Body parser
 app.use(express.json());
