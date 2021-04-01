@@ -25,7 +25,7 @@ db.once('open', function callback () {
 // Body parser
 app.use(express.json());
 
-// app.use(cors());
+app.use(cors());
 
 // Initial Page Request
 app.get('/', (req, res) => {
@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
 app.get('/getAllRecipes', recipeController.getAllRecipes, (req, res) => {
 
 
-  // res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Origin", "*");
   res.status(200).send(res.locals.recipes)
 });
 
@@ -65,7 +65,7 @@ app.put('/updateRecipe', recipeController.updateRecipe, (req, res) => {
 // Delete Recipe
 app.delete('/deleteRecipe', recipeController.deleteOne, (req, res) => {
 
-  res.status(200).send('Delete successful');
+  res.status(200).send("Delete Successful");
 })
 
 // Global error handler

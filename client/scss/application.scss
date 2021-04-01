@@ -1,5 +1,5 @@
 body {
-  background: lightblue;
+  // background: lightblue;
 }
 
 input {
@@ -7,7 +7,8 @@ input {
 }
 
 .recipe {
-  background: lightcoral;
-  margin: 4;
+  background: lightcyan;
+  margin: 8;
   padding: 4;
+  box-shadow: -2px 2px 2px grey;
 }

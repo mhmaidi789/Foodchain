@@ -53,12 +53,19 @@ recipeController.updateRecipe = (req, res, next) => {
   });
 }
 
-//Delete recipes by name
+//Delete recipes by id
 recipeController.deleteOne = (req, res, next) => {
 
-  const {recipeName} = req.body;
+  const {_id} = req.body;
 
-  Recipe.deleteOne({recipeName}, (err) => {
+  // Recipe.find({_id}, (err, response) => {
+  //   if (err) next({err})
+  //   res.locals.response = response[0]
+  //   next()
+  // })
+
+  Recipe.deleteOne({_id}, (err) => {
+    console.log()
     if (err) return next({err});
     return next();
   })

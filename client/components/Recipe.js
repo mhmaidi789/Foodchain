@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+var axios = require("axios").default;
 
 const { innerWidth: width, innerHeight: height } = window;
 
@@ -7,6 +7,31 @@ const { innerWidth: width, innerHeight: height } = window;
 export default class Recipe extends Component {
   constructor(props) {
     super(props);
+  }
+
+
+  //Delete Recipe
+  deleteRecipe(){
+
+    console.log(this.props.recipeObj["_id"])
+
+    var options = {
+      method: 'DELETE',
+      url: 'http://localhost:3000/deleteRecipe',
+      data: 
+      {"_id": this.props.recipeObj["_id"] }
+    };
+
+    axios.request(options)
+    .then((response) => {
+      console.log(response)
+      //Get recipes in Database
+      this.props.getAllRecipesAction()
+    })
+    .catch(function (error) {
+      console.log('error in axios')
+    });
+    
   }
 
 
@@ -62,13 +87,10 @@ export default class Recipe extends Component {
         {/* Amazon Portion */}
         <div >
           <button>Check Amazon</button>
-
+          <button onClick = {() => this.deleteRecipe()}>Delete Recipe</button>
         </div>
       </div>
     )
   }
-
-
-
 
 }

@@ -25,7 +25,7 @@ class App extends Component {
 
     axios.request(options)
     .then((response) => {
-      this.setState({recipesCollection: response.data});
+      this.setState({recipesCollection: response.data.reverse()});
     })
     .catch(function (error) {
       console.log('error in axios')
@@ -34,9 +34,37 @@ class App extends Component {
 
   //Post new recipe
   postRecipe(){
-    console.log(document.getElementById('recipeNameInput').value);
+
+    //Receive values from input forms and store in variables
+    const recipeName = document.getElementById('recipeNameInput').value;
+    const cookTime = document.getElementById('cookTimeInput').value;
+    const notes = document.getElementById('notesInput').value;
+    const createdBy = document.getElementById('createdByInput').value;
+    const ingredients = document.getElementById('ingredientsInput').value;
+    const link = document.getElementById('linkInput').value;
+    const imageURL = document.getElementById('imageURLInput').value;
+    
+  
+    //Make a post request to server
+    var options = {
+      method: 'POST',
+      url: 'http://localhost:3000/newRecipe',
+      data: {recipeName, cookTime, notes, createdBy, ingredients, link, imageURL
+      }
+    };
+
+    axios.request(options)
+    .then((response) => {
+      console.log(response)
+    })
+    .catch(function (error) {
+      console.log('error in axios post')
+    });
+
+    this.getAllRecipes();
 
   }
+
 
   render() {
     const recipesCollection = this.state.recipesCollection;
@@ -55,7 +83,7 @@ class App extends Component {
 
     recipesCollection.forEach((recipeObj, index) => {
       // console.log(recipeObj)
-      recipes.push(<Recipe key = {index} recipeObj = {recipeObj} />)
+      recipes.push(<Recipe getAllRecipesAction = {() => this.getAllRecipes()} key = {index} recipeObj = {recipeObj} />)
     })
 
     return(
