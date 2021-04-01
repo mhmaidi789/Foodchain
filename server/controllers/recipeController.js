@@ -32,9 +32,9 @@ recipeController.getRecipe = (req, res, next) => {
 recipeController.createRecipe = (req, res, next) => {
 
   //Receive information from front-end
-  const {recipeName, notes, link, ingredients} = req.body;
+  const {recipeName, notes, link, ingredients, imageURL} = req.body;
 
-  Recipe.create({recipeName, notes, link, ingredients}, (err, recipe) =>{
+  Recipe.create({recipeName, notes, link, ingredients, imageURL}, (err, recipe) =>{
     if(err) return next({err});
     res.locals.recipe = recipe;
     return next();

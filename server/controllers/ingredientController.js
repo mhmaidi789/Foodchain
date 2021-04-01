@@ -39,7 +39,7 @@ ingredientController.ingredientSearch = (req, res, next) => {
         var options = {
           method: 'GET',
           url: 'https://amazon-price1.p.rapidapi.com/search',
-          params: {keywords: item, marketplace: 'US', page: '1'},
+          params: {keywords: item, marketplace: 'US'},
           headers: {
             'x-rapidapi-key': '25bc85f706msh5e563f0c5f0fbcap107099jsn79c93516580e',
             'x-rapidapi-host': 'amazon-price1.p.rapidapi.com'

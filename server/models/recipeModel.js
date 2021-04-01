@@ -7,6 +7,7 @@ const recipeSchema = new Schema({
   notes: {type: String},
   cookTime: {type: String},
   link: {type: String},
+  imageURL: {type: String},
   ingredients: {type: String, required: true},
 });
 

@@ -1,7 +1,6 @@
 const express = require('express');
-const fetch = require('node-fetch')
-// const path = require('path');
-// const cookieParser = require('cookie-parser');
+const path = require('path');
+const cors = require('cors');
 
 //Controllers
 const recipeController = require('./controllers/recipeController.js');
@@ -26,10 +25,19 @@ db.once('open', function callback () {
 // Body parser
 app.use(express.json());
 
+app.use(cors());
 
 // Initial Page Request
-app.get('/', recipeController.getAllRecipes, (req, res) => {
+app.get('/', (req, res) => {
 
+  res.status(200).sendFile(path.join(__dirname, '../index.html'))
+});
+
+//get all recipes
+app.get('/getAllRecipes', recipeController.getAllRecipes, (req, res) => {
+
+
+  res.header("Access-Control-Allow-Origin", "*");
   res.status(200).send(res.locals.recipes)
 });
 
