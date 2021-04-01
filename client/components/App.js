@@ -55,6 +55,20 @@ class App extends Component {
 
     return(
       <div>
+        <div>
+          <h3>Create New</h3>
+          
+          <input placeholder={"Recipe Name"} />
+          <input placeholder={"Notes"} />
+          <input placeholder={"Cook Time"} />
+          <input placeholder={"Link"} />
+          <input placeholder={"Image URL"} />
+          <input placeholder={"Ingredients"} />
+          <input placeholder={"Created By"} />
+          <div style = {{marginTop: 10}}>
+            <button>Submit</button>
+          </div>
+        </div>
         {recipes}
       </div>
     )

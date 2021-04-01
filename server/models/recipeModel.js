@@ -9,6 +9,7 @@ const recipeSchema = new Schema({
   link: {type: String},
   imageURL: {type: String},
   ingredients: {type: String, required: true},
+  createdBy: {type: String}
 });
 
 module.exports = mongoose.model('Recipe', recipeSchema);
