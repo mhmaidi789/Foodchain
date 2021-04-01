@@ -32,9 +32,14 @@ class App extends Component {
     });
   }
 
+  //Post new recipe
+  postRecipe(){
+    console.log(document.getElementById('recipeNameInput').value);
+
+  }
+
   render() {
     const recipesCollection = this.state.recipesCollection;
-
 
     //Return loading if data has not been received yet
     if(recipesCollection.length <1){
@@ -58,16 +63,18 @@ class App extends Component {
         <div>
           <h3>Create New</h3>
           
-          <input placeholder={"Recipe Name"} />
-          <input placeholder={"Notes"} />
-          <input placeholder={"Cook Time"} />
-          <input placeholder={"Link"} />
-          <input placeholder={"Image URL"} />
-          <input placeholder={"Ingredients"} />
-          <input placeholder={"Created By"} />
+          <input id={'recipeNameInput'} placeholder={"Recipe Name (required)"} />
+          <input id={'cookTimeInput'} placeholder={"Cook Time"} />
+          <input id={'notesInput'} placeholder={"Notes"} />
+          <input id={'createdByInput'} placeholder={"Created By"} />
+          <input id={'ingredientsInput'} placeholder={"Ingredients (required)"} />
+          <input id={'linkInput'} placeholder={"Website Link"} />
+          <input id={'imageURLInput'} placeholder={"Image URL"} />
+          
           <div style = {{marginTop: 10}}>
-            <button>Submit</button>
+            <button onClick = {() => this.postRecipe()}>Submit</button>
           </div>
+
         </div>
         {recipes}
       </div>
