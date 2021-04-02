@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Recipe from './Recipe.js';
+import PopUp from './Popup.js'
 
 var axios = require("axios").default;
 
@@ -9,6 +10,7 @@ class App extends Component {
     super(props);
     this.state = {
       recipesCollection: [],
+      showPopUp: false,
     }
   }
 
@@ -65,7 +67,6 @@ class App extends Component {
 
   }
 
-
   render() {
     const recipesCollection = this.state.recipesCollection;
 
@@ -83,7 +84,7 @@ class App extends Component {
 
     recipesCollection.forEach((recipeObj, index) => {
       // console.log(recipeObj)
-      recipes.push(<Recipe getAllRecipesAction = {() => this.getAllRecipes()} key = {index} recipeObj = {recipeObj} />)
+      recipes.push(<Recipe getAllRecipesAction = {() => this.getAllRecipes()} showPopUpAction = {() => this.showPopUp()} key = {index} recipeObj = {recipeObj} />)
     })
 
     return(
@@ -102,7 +103,6 @@ class App extends Component {
           <div style = {{marginTop: 10}}>
             <button onClick = {() => this.postRecipe()}>Submit</button>
           </div>
-
         </div>
         {recipes}
       </div>

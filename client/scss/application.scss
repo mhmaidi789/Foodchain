@@ -1,5 +1,6 @@
 body {
   // background: lightblue;
+  width: 800;
 }
 
 input {
@@ -8,7 +9,13 @@ input {
 
 .recipe {
   background: lightcyan;
-  margin: 8;
+  margin: 4;
   padding: 4;
   box-shadow: -2px 2px 2px grey;
+
+}
+
+.modal {
+  background: beige;
+  margin: 2;
 }

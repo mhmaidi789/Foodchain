@@ -14,6 +14,7 @@ ingredientController.ingredientSearch = (req, res, next) => {
 
   //Iterate through each ingredient found in res.locals.recipe
   const recipe = res.locals.recipe;
+  // console.log('recipe in ingredients controller', recipe)
   const ingredients = recipe.ingredients.split(',');
   ingredients.forEach( (item, index) => {
 

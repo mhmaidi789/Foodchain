@@ -18,9 +18,9 @@ recipeController.getAllRecipes = (req, res, next) => {
 //Get specific recipes
 recipeController.getRecipe = (req, res, next) => {
 
-  const {recipeName} = req.body;
+  const {_id} = req.query;
 
-  Recipe.find({recipeName}, (err, recipe) => {
+  Recipe.find({_id}, (err, recipe) => {
     if(err) return next({err});
     res.locals.recipe = recipe[0];
     return next();
@@ -56,6 +56,8 @@ recipeController.updateRecipe = (req, res, next) => {
 //Delete recipes by id
 recipeController.deleteOne = (req, res, next) => {
 
+  // console.log('req body in delete', req.body)
+
   const {_id} = req.body;
 
   // Recipe.find({_id}, (err, response) => {
@@ -65,7 +67,6 @@ recipeController.deleteOne = (req, res, next) => {
   // })
 
   Recipe.deleteOne({_id}, (err) => {
-    console.log()
     if (err) return next({err});
     return next();
   })

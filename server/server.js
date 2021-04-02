@@ -24,7 +24,6 @@ db.once('open', function callback () {
 
 // Body parser
 app.use(express.json());
-
 app.use(cors());
 
 // Initial Page Request
@@ -35,8 +34,6 @@ app.get('/', (req, res) => {
 
 //get all recipes
 app.get('/getAllRecipes', recipeController.getAllRecipes, (req, res) => {
-
-
   res.header("Access-Control-Allow-Origin", "*");
   res.status(200).send(res.locals.recipes)
 });
