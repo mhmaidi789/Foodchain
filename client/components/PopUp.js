@@ -12,7 +12,8 @@ render() {
   const ingredientsListsElements = [];
 
   for (const ingredient in ingredientsList){
-    const ingredientContainer = <div style = {{display: 'flex'}}>
+    if(Array.isArray(ingredientsList[ingredient])){
+      const ingredientContainer = <div style = {{display: 'flex'}}>
       <label>{ingredient}: </label>
       <div>
         <p>Title: {ingredientsList[ingredient][0].title}</p>
@@ -22,6 +23,19 @@ render() {
       </div>
     </div>
     ingredientsListsElements.push(ingredientContainer)
+    }else {
+        const ingredientContainer = <div style = {{display: 'flex'}}>
+        <label>{ingredient}: </label>
+        <div>
+          <p>Title: {ingredientsList[ingredient].title}</p>
+          <p>Price: {ingredientsList[ingredient].price}</p>
+          <p>Prime elgible: {ingredientsList[ingredient].isPrimeEligible === "1"?"Yes":"No"}</p>
+          <a href= {ingredientsList[ingredient].detailPageURL}>View Item on Amazon</a>
+        </div>
+      </div>
+      ingredientsListsElements.push(ingredientContainer)
+    }
+    
   }
   
 
